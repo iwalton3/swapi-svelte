@@ -7,7 +7,7 @@
 	import Auth from './auth/app.js'
 
 	const app = {
-		name: "SPA Test",
+		name: "Application Host",
 		routes: {
 			default: Home,
 			auth: Auth
