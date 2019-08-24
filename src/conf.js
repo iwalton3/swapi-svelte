@@ -1,5 +1,5 @@
 const conf = {
-    site: "Ian't Web Server",
+    site: "Ian's Web Server",
     logo: "https://iwalton.com/theme/logo.svg"
 }
 
