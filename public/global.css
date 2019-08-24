@@ -9,9 +9,9 @@ html {
 	border-top:10px solid #ECEEF1;
 	border-bottom:10px solid #ECEEF1;
 	color:#61666c;
-	font-size:1em;
+	font-size:1rem;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-	line-height:1.5em;
+	line-height:1.5rem;
 }
 
 body {
@@ -37,14 +37,16 @@ label {
 button.link {
 	background: none!important;
 	border: none;
-	padding: 0!important;
+	padding: 0 !important;
 	color: #2222FF;
 	cursor: pointer;
 	font-family: inherit;
+        font-size: 1rem;
+        line-height: 1.5rem;
 }
 
 div.section {
-	margin-bottom: 1.5em;
+	margin-bottom: 1.5rem;
 }
 
 table, td {
