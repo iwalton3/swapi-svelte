@@ -24,7 +24,7 @@ nav {
         margin-top: 20px;
 }
 
-nav h1 {
+a.title {
     color: #2a2a2a;
 }
 

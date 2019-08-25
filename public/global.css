@@ -119,3 +119,7 @@ body.dark h6 {
 	background-color: #372a2a;
 	border-radius: 5px;
 }
+
+body.dark nav a.title {
+    color: #ccc;
+}
