@@ -2,6 +2,7 @@
     import login from './auth.js';
     import Login from './Login.svelte';
     import Link from '../router/Link.svelte';
+    import { darkTheme } from '../util.js';
 </script>
 
 
@@ -24,4 +25,5 @@
             <Link view={Login}>Log in</Link>
         </p>
     {/if}
+    <p><label><input type="checkbox" bind:checked={$darkTheme}> Use Dark Theme?</label></p>
 </div>

@@ -2,14 +2,29 @@
     import conf from '../conf.js';
     import { app } from './router.js';
     import login from '../auth/auth.js';
+    import { darkTheme } from '../util.js';
+
     export let title = "Main Page";
     export let wide = false;
+    export let header = true;
+    export let dark = false;
+
+    $: useDark = dark || $darkTheme
+    $: if (useDark) {
+        document.body.classList.add("dark");
+    } else {
+        document.body.classList.remove("dark");
+    }
 </script>
 
 <style>
 nav {
 	padding: 0 0 0 48px;
 	position: relative;
+}
+
+nav h1 {
+    color: #2a2a2a;
 }
 
 nav img {
@@ -40,10 +55,12 @@ h1 {
 </svelte:head>
 
 <div class:wide>
-    <nav>
-        <h1><a className="title" href="/"><img src="{conf.logo}" alt="logo">{conf.site}</a></h1>
-        <h3><a href={$app.root}>{$app.name}</a> - {title}</h3>
-    </nav>
+    {#if header}
+        <nav>
+            <h1><a className="title" href="/"><img src="{conf.logo}" alt="logo">{conf.site}</a></h1>
+            <h3><a href={$app.root}>{$app.name}</a> - {title}</h3>
+        </nav>
+    {/if}
     {#if !app.require || $login.has(app.require)}
         <slot/>
     {:else}
