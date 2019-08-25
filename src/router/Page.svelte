@@ -21,6 +21,7 @@
 nav {
 	padding: 0 0 0 48px;
 	position: relative;
+        padding-top: 20px;
 }
 
 nav h1 {
@@ -30,7 +31,7 @@ nav h1 {
 nav img {
     left: 0;
     position: absolute;
-    top: 0;
+    top: 20px;
 }
 
 div {
