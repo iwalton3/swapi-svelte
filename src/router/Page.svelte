@@ -64,6 +64,6 @@ h1 {
     {#if !$app.require || $login.has($app.require)}
         <slot/>
     {:else}
-        You need the {$app.require} permission to use this app. Please login.
+        You need the {$app.require} permission to use this app. <a href="#/auth/">Please login.</a>
     {/if}
 </div>
