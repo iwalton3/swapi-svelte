@@ -22,3 +22,9 @@ export function localStore(name, initial) {
 }
 
 export const darkTheme = localStore("dark", false);
+
+export async function sleep(delay) {
+    return new Promise(function (fulfill) {
+        setTimeout(fulfill, delay);
+    });
+}
