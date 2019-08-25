@@ -19,7 +19,8 @@ class Router {
             incr = `${incr}/`
             const app = { 
                 name: routes.name,
-                root: `#${incr}`
+                root: `#${incr}`,
+                ...routes
             }
             if (!routes.unlisted && incr != "/") {
                 this.appList.push(routes);
