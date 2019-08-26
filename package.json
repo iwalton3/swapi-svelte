@@ -10,14 +10,18 @@
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-babel": "^4.0.2",
+    "rollup-plugin-polyfill": "^3.0.0",
     "svelte": "^3.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    "@babel/runtime": "^7.0.0"
+    "@babel/runtime": "^7.0.0",
+    "sirv-cli": "^0.4.4"
   },
   "dependencies": {
-    "sirv-cli": "^0.4.4"
+    "core-js": "3",
+    "d3-dsv": "^1.1.1",
+    "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
     "build": "rollup -c rollup-prod.config.js",

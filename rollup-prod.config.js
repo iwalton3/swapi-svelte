@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import polyfill from 'rollup-plugin-polyfill';
 
 export default [
 	{
@@ -74,17 +75,22 @@ export default [
 				dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
 			}),
 			commonjs(),
-	
 			babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
+				exclude: [
+					'node_modules/@babel/**',
+					'node_modules/core-js/**'
+				],
 				runtimeHelpers: true,
 				presets: [
 					['@babel/preset-env', {
-						targets: '> 0.25%, not dead'
+						targets: '> 0.25%, not dead',
+						useBuiltIns: 'usage',
+  						corejs: 3
 					}]
 				]
 			}),
-
+			polyfill(['whatwg-fetch']),
 			// If we're building for production (npm run build
 			// instead of npm run dev), minify
 			terser()
