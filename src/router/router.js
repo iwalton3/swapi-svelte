@@ -12,9 +12,15 @@ class Router {
         this.routeMap = {};
         this.routeForMap = new Map();
         this.callback = null;
+        this.special = {};
     }
     
     decodeRoutes(routes, incr="", app=null) {
+        if (incr == "") {
+            // Executes for root only.
+            this.special = routes.special;
+        }
+
         if (routes.routes) {
             incr = `${incr}/`
             const app = { 
@@ -70,7 +76,9 @@ class Router {
 
     handleHashChange() {
         const state = this.decodeHash(window.location.hash);
-        const route = this.routeMap[state.path] || this.routeMap["/"];
+        const route = (this.routeMap[state.path]
+                       || this.routeMap[state.path+"/"]
+                       || this.routeMap["/"]);
         view.set(route.view);
         app.set({
             view: route.view,

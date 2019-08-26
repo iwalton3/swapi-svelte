@@ -3,6 +3,14 @@
     import Login from './Login.svelte';
     import Link from '../router/Link.svelte';
     import { darkTheme } from '../util.js';
+
+    function logoff() {
+        $login.logoff();
+    }
+
+    function logoff_all() {
+        $login.logoff_all();
+    }
 </script>
 
 
@@ -12,11 +20,11 @@
         <p>Welcome, {$login.user}!</p>
         <p>
             <img src="icons/leave.png" alt="logoff">
-            <button class="link" on:click={$login.logoff}>Log Off</button>
+            <button class="link" on:click={logoff}>Log Off</button>
         </p>
         <p>
             <img src="icons/leave.png" alt="logoff all">
-            <button class="link" on:click={$login.logoff_all}>Log Off All Browsers</button>
+            <button class="link" on:click={logoff_all}>Log Off All Browsers</button>
         </p>
     {:else}
         <p>You are not logged in.</p>

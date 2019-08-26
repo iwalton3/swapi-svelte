@@ -21,11 +21,11 @@ class Login {
     async login(otp) {
         if (!this.partialLogin) return false;
         const {success} = await login(this.partialLogin, otp)
+        this.partialLogin = null;
         if (success) {
             await this.upd();
             return true;
         } else {
-            this.partialLogin = null;
             this.updated(this);
             return false;
         }
@@ -33,12 +33,12 @@ class Login {
 
     async logoff() {
         await logoff();
-        this.upd();
+        await this.upd();
     }
 
     async logoff_all() {
         await logoff_all();
-        this.upd();
+        await this.upd();
     }
 
     async upd() {

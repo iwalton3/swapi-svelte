@@ -8,6 +8,9 @@
 
     const app = {
         name: "Application Host",
+        special: {
+            authError: AuthError
+        },
         routes: {
             default: Home,
             auth: Auth

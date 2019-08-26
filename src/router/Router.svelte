@@ -3,7 +3,8 @@
     // The architecture of the app framework is independent of
     // the routing mechanism, so an HTML5 router could be made. 
 
-    import router, { view } from './router.js';
+    import router, { view, app as appStore } from './router.js';
+    import login from '../auth/auth.js';
 </script>
 
 <script>
@@ -14,4 +15,8 @@
 </script>
 
 <svelte:window on:hashchange={router.handleHashChange.bind(router)}/>
-<svelte:component this={$view}/>
+{#if !$appStore.require || $login.has($appStore.require)}
+    <svelte:component this={$view}/>
+{:else}
+    <svelte:component this={router.special.authError}/>
+{/if}
