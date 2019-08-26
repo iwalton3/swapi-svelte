@@ -2,6 +2,7 @@
     // Templates and Routing
     import Router from './router/Router.svelte';
     import Home from './Home.svelte';
+    import AuthError from './auth/AuthError.svelte';
 
     // Apps
     import Auth from './auth/app.js'
