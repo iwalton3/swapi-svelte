@@ -15,6 +15,8 @@
     } else {
         document.body.classList.remove("dark");
     }
+
+    $: homeUrl = (conf.useLocalHome && $app.root != "#/") ? "#/" : "/";
 </script>
 
 <style>
@@ -57,7 +59,7 @@ h1 {
 <div class:wide>
     {#if header}
         <nav>
-            <h1><a class="title" href="/"><img src="{conf.logo}" alt="logo">{conf.site}</a></h1>
+            <h1><a class="title" href="{homeUrl}"><img src="{conf.logo}" alt="logo">{conf.site}</a></h1>
             <h3><a href={$app.root}>{$app.name}</a> - {title}</h3>
         </nav>
     {/if}
