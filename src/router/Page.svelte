@@ -19,8 +19,8 @@
 
 <style>
 nav {
-	padding: 0 0 0 48px;
-	position: relative;
+    padding: 0 0 0 48px;
+    position: relative;
         margin-top: 20px;
 }
 
@@ -34,9 +34,9 @@ nav img {
 }
 
 div {
-	margin:0 auto;
-	padding-top:20px;
-	max-width:700px;
+    margin:0 auto;
+    padding-top:20px;
+    max-width:700px;
 }
 
 .wide {
