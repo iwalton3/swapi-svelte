@@ -2,6 +2,8 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
+import postcss from 'rollup-plugin-postcss';
+import { sass } from 'svelte-preprocess-sass';
 
 export default {
 	input: 'src/main.js',
@@ -13,12 +15,11 @@ export default {
 	},
 	plugins: [
 		svelte({
+			preprocess: {
+				style: sass(),
+			},
 			dev: true,
-			// we'll extract any component CSS out into
-			// a separate file — better for performance
-			css: css => {
-				css.write('public/bundle.css');
-			}
+			emitCss: true
 		}),
 
 		// If you have external dependencies installed from
@@ -31,7 +32,15 @@ export default {
 			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
 		}),
 		commonjs(),
-
+		postcss({
+			use: [
+				['sass', {
+					includePaths: ['node_modules', 'src/theme']
+				}]
+			],
+			extract: true,
+			sourceMap: true
+		}),
 		// Watch the `public` directory and refresh the
 		// browser on changes
 		livereload('public'),

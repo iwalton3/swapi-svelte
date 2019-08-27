@@ -4,6 +4,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import polyfill from 'rollup-plugin-polyfill';
+import postcss from 'rollup-plugin-postcss';
+import { sass } from 'svelte-preprocess-sass';
 
 export default [
 	{
@@ -16,13 +18,12 @@ export default [
 		},
 		plugins: [
 			svelte({
+				preprocess: {
+					style: sass(),
+				},
 				// enable run-time checks when not in production
 				dev: false,
-				// we'll extract any component CSS out into
-				// a separate file — better for performance
-				css: css => {
-					css.write('public/bundle.css');
-				}
+				emitCss: true
 			}),
 	
 			// If you have external dependencies installed from
@@ -35,9 +36,15 @@ export default [
 				dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
 			}),
 			commonjs(),
-	
-			// If we're building for production (npm run build
-			// instead of npm run dev), minify
+			postcss({
+				use: [
+					['sass', {
+						includePaths: ['node_modules', 'src/theme']
+					}]
+				],
+				extract: true,
+				minimize: true
+			}),
 			terser({
 				module: true
 			})
@@ -56,13 +63,12 @@ export default [
 		},
 		plugins: [
 			svelte({
+				preprocess: {
+					style: sass(),
+				},
 				// enable run-time checks when not in production
 				dev: false,
-				// we'll extract any component CSS out into
-				// a separate file — better for performance
-				css: css => {
-					css.write('public/bundle.css');
-				}
+				emitCss: true
 			}),
 	
 			// If you have external dependencies installed from
@@ -91,8 +97,16 @@ export default [
 				]
 			}),
 			polyfill(['whatwg-fetch']),
-			// If we're building for production (npm run build
-			// instead of npm run dev), minify
+			// Yes this is run twice...
+			postcss({
+				use: [
+					['sass', {
+						includePaths: ['node_modules', 'src/theme']
+					}]
+				],
+				extract: true,
+				minimize: true
+			}),
 			terser()
 		],
 		watch: {

@@ -60,36 +60,6 @@ td {
     padding: 8px;
 }
 
-/* Dark Theme */
-body.dark {
-    border-color: #222;
-    background: #111;
-    color: #ccc;
-}
-
-body.dark * {
-    border-color: #555 !important;
-}
-
-body.dark a, body.dark button.link {
-    color: #b1cbf7;
-}
-
-body.dark a:visited {
-    color: #cdb4e7;
-}
-
-body.dark input,
-body.dark button,
-body.dark textarea,
-body.dark select {
-    --moz-appearance: none;
-    --webkit-appearance: none;
-    border: 1px solid;
-    background-color: #353535;
-        color: #ccc;
-}
-
 input[type="radio"] {
     --moz-appearance: radio;
     --webkit-appearance: radio;
@@ -100,26 +70,50 @@ input[type="checkbox"] {
     --webkit-appearance: checkbox;
 }
 
-body.dark h1, body.dark h2 {
-    width: 100%;
-    background-color: #28313e;
-    border-radius: 5px;
-}
-
-body.dark h3,
-body.dark h4 {
-    width: 100%;
-    background-color: #2a3731;
-    border-radius: 5px;
-}
-
-body.dark h5,
-body.dark h6 {
-    width: 100%;
-    background-color: #372a2a;
-    border-radius: 5px;
-}
-
-body.dark nav a.title {
+/* Dark Theme */
+body.dark {
+    border-color: #222;
+    background: #111;
     color: #ccc;
+
+    * {
+        border-color: #555 !important;
+    }
+
+    a, button.link {
+        color: #b1cbf7;
+    }
+
+    a:visited {
+        color: #cdb4e7;
+    }
+
+    input, button, textarea, select {
+        --moz-appearance: none;
+        --webkit-appearance: none;
+        border: 1px solid;
+        background-color: #353535;
+            color: #ccc;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    h1, h2 {
+        background-color: #28313e;
+    }
+
+    h3, h4 {
+        background-color: #2a3731;
+    }
+
+    h5, h6 {
+        background-color: #372a2a;
+    }
+
+    nav a.title {
+        color: #ccc;
+    }
 }
