@@ -11,10 +11,14 @@
     export let app = {};
 
     router.decodeRoutes(app);
-    router.handleHashChange();
+    router.handleLocationChange();
+
+    function handlePopState(event) {
+        router.handleLocationChange(event.state);
+    }
 </script>
 
-<svelte:window on:hashchange={router.handleHashChange.bind(router)}/>
+<svelte:window on:popstate={handlePopState}/>
 {#if !$appStore.require || $login.has($appStore.require)}
     <svelte:component this={$view}/>
 {:else}

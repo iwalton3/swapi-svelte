@@ -13,6 +13,15 @@ class Router {
         this.routeForMap = new Map();
         this.callback = null;
         this.special = {};
+        this.hashRouting = true;
+        if (document.getElementsByTagName("base")[0]) {
+            this.base = document.baseURI;
+            this.hashRouting = false;
+            if (this.base.endsWith("/"))
+                this.base = this.base.substring(0,this.base.length-1);
+        } else {
+            this.base = document.baseURI.split("#")[0] + "#";
+        }
     }
     
     decodeRoutes(routes, incr="", app=null) {
@@ -25,7 +34,7 @@ class Router {
             incr = `${incr}/`
             const app = { 
                 name: routes.name,
-                root: `#${incr}`,
+                root: `${incr}`,
                 ...routes
             }
             if (!routes.unlisted && incr != "/") {
@@ -47,13 +56,13 @@ class Router {
         }
     }
 
-    decodeHash(fullHash) {
-        const hash = fullHash.substring(1);
-        const hashParts = hash.split("?");
-        const path = hashParts[0];
+    decode(location) {
+        const fullPath = location.substring(this.base.length);
+        const pathParts = fullPath.split("?");
+        const path = pathParts[0];
         const params = {};
-        if (hashParts.length > 1) {
-            var paramsList = hashParts[1].split("&");
+        if (pathParts.length > 1) {
+            var paramsList = pathParts[1].split("&");
             for (let i=0; i<paramsList.length; i++) {
                 var t = paramsList[i].split("=");
                 params[t[0]] = decodeURIComponent(t[1]);
@@ -62,23 +71,35 @@ class Router {
         return { path, params }; 
     }
 
-    genHash({path, params}) {
-        var hash = "#" + path;
-        var i = 0;
+    gen({path, params}) {
+        let fullPath = this.base + path;
+        let i = 0;
         for (var item in params) {
-            if (i == 0) hash += "?";
-            else hash += "&";
-            hash += item + "=" + encodeURIComponent(params[item]);
+            if (i == 0) fullPath += "?";
+            else fullPath += "&";
+            fullPath += item + "=" + encodeURIComponent(params[item]);
             i++;
         }
-        return hash;
+        return fullPath;
     }
 
-    handleHashChange() {
-        const state = this.decodeHash(window.location.hash);
-        const route = (this.routeMap[state.path]
-                       || this.routeMap[state.path+"/"]
-                       || this.routeMap["/"]);
+    handleLocationChange(state) {
+        if (!state) {
+            state = this.decode(document.location.href);
+        }
+        let route = this.routeMap[state.path];
+        if (!route) {
+            const redirect = this.routeMap[state.path+"/"];
+            if (!this.hashRouting && document.location.hash && document.location.hash[1] == "/") {
+                this.replaceView(document.location.hash.substring(1).split("?")[0], state.params);
+                return;
+            } else if (redirect && state.path != "") {
+                this.replaceView(state.path+"/", state.params);
+                return;
+            } else {
+                route = this.routeMap["/"];
+            }
+        }
         view.set(route.view);
         app.set({
             view: route.view,
@@ -87,15 +108,51 @@ class Router {
         params.set(state.params);
     }
 
-    setView(view, params={}) {
-        window.location.hash = this.routeFor(view, params);
+    setView(view, params={}, fullPath=null) {
+        const state = this.routeState(view, params);
+        if (!fullPath)
+            fullPath = this.gen(state);
+        history.pushState(state, "", fullPath);
+        this.handleLocationChange(state);
+    }
+
+    replaceView(view, params={}, fullPath=null) {
+        const state = this.routeState(view, params);
+        if (!fullPath)
+            fullPath = this.gen(state);
+        history.replaceState(state, "", fullPath);
+        this.handleLocationChange(state);
+    }
+
+    relative(path) {
+        const finalPathParts = [];
+        let pathParts = document.location.href.substring(this.base.length).split("/");
+        pathParts = pathParts.slice(0, pathParts.length-1);
+        pathParts = pathParts.concat(path.split("/"));
+        for (let i = 0; i < pathParts.length; i++) {
+            if (i+1 < pathParts.length && pathParts[i+1] == "..") {
+                i += 1;
+            } else {
+                finalPathParts.push(pathParts[i]);
+            }
+        }
+        return finalPathParts.join("/");
+    }
+
+    routeState(view, params={}) {
+        let path = view;
+        if (typeof(view) != "string") {
+            // view is a view object
+            path = this.routeForMap.get(view);
+        } else if (!view.startsWith("/")) {
+            // view is relative
+            path = this.relative(view);
+        }
+        return {path, params};
     }
 
     routeFor(view, params={}) {
-        return this.genHash({
-            path: this.routeForMap.get(view),
-            params
-        });
+        return this.gen(this.routeState(view, params));
     }
 }
 

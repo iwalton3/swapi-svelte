@@ -1,5 +1,6 @@
 <script>
-    import login from './auth.js'
+    import login from './auth.js';
+    import router from '../router/router.js';
     export let after = null;
 
     let user = "";
@@ -11,7 +12,7 @@
 
     async function loginAct() {
         if ((await $login.login(otp)) && after)
-            window.location.href = after;
+            router.setView(after);
     }
 </script>
 

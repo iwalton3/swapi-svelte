@@ -3,6 +3,7 @@
     import { app } from './router.js';
     import login from '../auth/auth.js';
     import { darkTheme } from '../util.js';
+    import Link from './Link.svelte';
 
     export let title = "Main Page";
     export let wide = false;
@@ -15,8 +16,6 @@
     } else {
         document.body.classList.remove("dark");
     }
-
-    $: homeUrl = (conf.useLocalHome && $app.root != "#/") ? "#/" : "/";
 </script>
 
 <style>
@@ -59,8 +58,14 @@ h1 {
 <div class:wide>
     {#if header}
         <nav>
-            <h1><a class="title" href="{homeUrl}"><img src="{conf.logo}" alt="logo">{conf.site}</a></h1>
-            <h3><a href={$app.root}>{$app.name}</a> - {title}</h3>
+            <h1>
+                {#if (conf.useLocalHome && $app.root != "/") || conf.alwaysUseLocalHome}
+                    <Link className="title" view="/"><img src="{conf.logo}" alt="logo">{conf.site}</Link>
+                {:else}
+                    <a class="title" href="/"><img src="{conf.logo}" alt="logo">{conf.site}</a>
+                {/if}
+            </h1>
+            <h3><Link view={$app.root}>{$app.name}</Link> - {title}</h3>
         </nav>
     {/if}
     <slot/>
