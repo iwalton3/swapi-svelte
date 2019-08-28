@@ -29,7 +29,7 @@
         <select bind:value on:change={commit}
                            on:click={() => { editing = true; }}>
             {#each options as option}
-                <option>{option}</option>
+                <option value={option}>{option}</option>
             {/each}
         </select>
     {:else}
