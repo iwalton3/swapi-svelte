@@ -5,6 +5,6 @@
 
 <select bind:value on:change>
     {#each options as option}
-        <option>{option}</option>
+        <option value={option}>{option}</option>
     {/each}
 </select>
