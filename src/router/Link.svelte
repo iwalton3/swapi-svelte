@@ -1,15 +1,27 @@
 <script>
     import router from './router.js';
 
-    // You don't *have* to use this with this router,
-    // but it will automatically find route names for you.
-    // All you need is a reference to the page.
+    // The Link tag is required if you are using HTML5
+    // routing. It is encouraged for hash routing, but
+    // not technically required.
+
+    // The 'view' argument accepts:
+    // - View Object Reference
+    // - Relative path "view" or "../view"
+    // - Absolute path "/view"
 
     export let view;
     export let params = {};
     export let title = undefined;
+    export let className = undefined;
+    const state = router.routeState(view, params);
+    const fullPath = router.gen(state);
+
+    function click() {
+        router.setView(view, params, fullPath)
+    }
 </script>
 
-<a href={router.routeFor(view, params)} title>
+<a href={fullPath} on:click|preventDefault={click} class={className} title>
     <slot/>
 </a>

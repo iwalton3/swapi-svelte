@@ -4,5 +4,5 @@
 </script>
 
 <Page title="Login">
-    <LoginComponent after="#/"/>
+    <LoginComponent after="/"/>
 </Page>
