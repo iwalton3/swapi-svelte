@@ -14,13 +14,14 @@ class Router {
         this.callback = null;
         this.special = {};
         this.hashRouting = true;
-        if (document.getElementsByTagName("base")[0]) {
-            this.base = document.baseURI;
+        const baseElem = document.getElementsByTagName("base")[0];
+        if (baseElem) {
+            this.base = baseElem.href;
             this.hashRouting = false;
             if (this.base.endsWith("/"))
                 this.base = this.base.substring(0,this.base.length-1);
         } else {
-            this.base = document.baseURI.split("#")[0] + "#";
+            this.base = document.location.split("#")[0] + "#";
         }
     }
     
@@ -32,11 +33,11 @@ class Router {
 
         if (routes.routes) {
             incr = `${incr}/`
-            const app = { 
+            const app = {
                 name: routes.name,
-                root: `${incr}`,
-                ...routes
-            }
+                root: incr
+            };
+            Object.assign(app, routes);
             if (!routes.unlisted && incr != "/") {
                 this.appList.push(routes);
             }
@@ -101,10 +102,11 @@ class Router {
             }
         }
         view.set(route.view);
-        app.set({
+        const appObj = {
             view: route.view,
-            ...route.app
-        });
+        };
+        Object.assign(appObj, route.app);
+        app.set(appObj);
         params.set(state.params);
     }
 
