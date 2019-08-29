@@ -10,7 +10,7 @@
     {#each router.appList as app}
         {#if !app.require || $login.has(app.require)}
             <p>
-                <img src={app.icon || "icons/app.png"} alt="app">
+                <img src={app.icon || "icons-sm/app.png"} alt="app">
                 <Link view={app.routes.default}>{app.name}</Link>
             </p>
         {/if}
