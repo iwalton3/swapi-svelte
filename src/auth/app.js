@@ -9,7 +9,7 @@ const app = {
         admin: {
             name: "Auth Admin",
             require: 'accountmanager',
-            icon: 'icons/user.png',
+            icon: 'icons-sm/user.png',
             routes: {
                 default: UserManager
             }
