@@ -55,7 +55,7 @@
     </div>
     <div class="section">
         <h3>Add User</h3>
-            <form on:submit={addUser}>
+            <form on:submit|preventDefault={addUser}>
             <label>User: <input type="text" bind:value={userToAdd}></label>
             <label>Role: <SelectBox bind:value={userToAddRole} options={roles}/></label>
             <input type="submit" value="Add"/>
