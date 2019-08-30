@@ -4,11 +4,18 @@
     import login from '../auth/auth.js';
     import { darkTheme } from '../util.js';
     import Link from './Link.svelte';
+    import { notificationList } from './notify.js';
 
     export let title = "Main Page";
     export let wide = false;
     export let header = true;
     export let dark = false;
+
+    const notifyImg = {
+        "warn": "icons-sm/warn.svg",
+        "info": "icons-sm/info.svg",
+        "error": "icons-sm/error.svg"
+    }
 
     $: useDark = dark || $darkTheme
     $: if (useDark) {
@@ -70,3 +77,13 @@ h1 {
     {/if}
     <slot/>
 </div>
+{#if $notificationList.length > 0}
+<div class="nlist">
+    {#each $notificationList as notification (notification.id)}
+        <div class={notification.severity}>
+            <img alt={notification.severity} src={notifyImg[notification.severity]}>
+            <span role="alert">{notification.message}</span>
+        </div>
+    {/each}
+</div>
+{/if}

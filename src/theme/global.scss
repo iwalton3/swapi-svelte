@@ -117,3 +117,36 @@ body.dark {
         color: #ccc;
     }
 }
+
+.nlist {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 350px;
+}
+
+@media only screen and (max-width: 480px) {
+    .nlist {
+        right: 0;
+        width: 100%;
+    }
+}
+
+.nlist div {
+    margin: 5px;
+}
+
+.warn {
+    background-color:#a39306 !important;
+    border: 1px #BDE5F8 solid !important;
+}
+
+.info {
+    background-color:#075BA3 !important;
+    border: 1px #BDE5F8 solid !important;
+}
+
+.error {
+    background-color:#a30609 !important;
+    border: 1px #BDE5F8 solid !important;
+}
