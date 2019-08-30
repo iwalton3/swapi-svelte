@@ -21,7 +21,7 @@ class Router {
             if (this.base.endsWith("/"))
                 this.base = this.base.substring(0,this.base.length-1);
         } else {
-            this.base = document.location.split("#")[0] + "#";
+            this.base = document.location.href.split("#")[0] + "#";
         }
     }
     
