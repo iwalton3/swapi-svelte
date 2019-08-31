@@ -3,6 +3,8 @@
     import Page from '../router/Page.svelte';
     import SelectBox from '../components/SelectBox.svelte';
     import LazySelectBox from '../components/LazySelectBox.svelte';
+    import notify from '../router/notify.js';
+
     let users = [];
     let roles = [];
     
@@ -17,13 +19,23 @@
 
     async function addUser() {
         if (!userToAdd) return false;
-        await register_user(userToAdd, userToAddRole);
+        try {
+            await register_user(userToAdd, userToAddRole);
+            notify(`Added user "${userToAdd}".`);
+        } catch (_) {
+            notify("User registration failed.", "error");
+        }
         await updateUserList();
     }
 
     async function updUser(user) {
         if (!user) return false;
-        await set_user_role(user.username, user.role);
+        try {
+            await set_user_role(user.username, user.role);
+            notify(`User "${user.username}" is now ${user.role}.`);
+        } catch (_) {
+            notify("User update failed.", "error");
+        }
         await updateUserList();
     }
 

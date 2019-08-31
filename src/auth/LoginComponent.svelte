@@ -1,17 +1,27 @@
 <script>
     import login from './auth.js';
     import router from '../router/router.js';
+    import notify from '../router/notify.js';
     export let after = null;
 
     let user = "";
     let otp = "";
 
-    function sendOtp() {
-        $login.send_otp(user);
+    async function sendOtp() {
+        try {
+            await $login.send_otp(user);
+        } catch (_) {
+            notify("Could not send email.", "error");
+        }
     }
 
     async function loginAct() {
-        if ((await $login.login(otp)) && after)
+        const {success} = await $login.login(otp);
+        if (!success)
+            notify("Login failed. Please try again.", "error");
+        else
+            notify("Login successful.");
+        if (success && after)
             router.setView(after);
     }
 </script>
