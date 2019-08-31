@@ -24,7 +24,7 @@
 nav {
     padding: 0 0 0 48px;
     position: relative;
-        margin-top: 20px;
+    margin-top: 20px;
 }
 
 a.title {
