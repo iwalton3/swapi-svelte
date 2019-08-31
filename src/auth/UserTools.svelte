@@ -1,16 +1,13 @@
 <script>
     import login from './auth.js';
     import Login from './Login.svelte';
+    import LogoffAll from './LogoffAll.svelte';
     import Link from '../router/Link.svelte';
     import Icon from '../components/Icon.svelte';
     import { darkTheme } from '../util.js';
 
     function logoff() {
         $login.logoff();
-    }
-
-    function logoff_all() {
-        $login.logoff_all();
     }
 </script>
 
@@ -25,7 +22,7 @@
         </p>
         <p>
             <Icon icon="leave" alt="logoff all"/>
-            <button class="link" on:click={logoff_all}>Log Off All Browsers</button>
+            <Link view={LogoffAll}>Log Off All Browsers</Link>
         </p>
     {:else}
         <p>You are not logged in.</p>

@@ -1,4 +1,5 @@
 import UserManager from './UserManager.svelte';
+import LogoffAll from './LogoffAll.svelte';
 import Login from './Login.svelte';
 
 const app = {
@@ -6,6 +7,7 @@ const app = {
     unlisted: true,
     routes: {
         default: Login,
+        logoff_all: LogoffAll,
         admin: {
             name: "Auth Admin",
             require: 'accountmanager',
