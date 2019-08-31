@@ -70,6 +70,52 @@ input[type="checkbox"] {
     --webkit-appearance: checkbox;
 }
 
+.notify-list {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 350px;
+
+    @media only screen and (max-width: 480px) {
+        right: 0;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    input, button, textarea, select {
+        font-size: 16px;
+    }
+}
+
+.notify {
+    margin: 7px;
+    padding: 0 3px;
+    position: relative;
+    padding-left: 23px;
+
+    img {
+        position: absolute;
+        left: 4px;
+        top: 4px;
+    }
+
+    &.warn {
+        background-color:#f8f2be;
+        border: 1px #a39306 solid;
+    }
+
+    &.info {
+        background-color:#BDE5F8;
+        border: 1px #075BA3 solid;
+    }
+
+    &.error {
+        background-color:#f8bec0;
+        border: 1px #a30609 solid;
+    }
+}
+
 /* Dark Theme */
 body.dark {
     border-color: #222;
@@ -115,5 +161,22 @@ body.dark {
 
     nav a.title {
         color: #ccc;
+    }
+
+    .notify {
+        &.warn {
+            background-color:#a39306 !important;
+            border: 1px #f8f2be solid !important;
+        }
+        
+        &.info {
+            background-color:#075BA3 !important;
+            border: 1px #BDE5F8 solid !important;
+        }
+        
+        &.error {
+            background-color:#a30609 !important;
+            border: 1px #f8bec0 solid !important;
+        }
     }
 }

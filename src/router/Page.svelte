@@ -4,6 +4,8 @@
     import login from '../auth/auth.js';
     import { darkTheme } from '../util.js';
     import Link from './Link.svelte';
+    import { notificationList } from './notify.js';
+    import Icon from '../components/Icon.svelte';
 
     export let title = "Main Page";
     export let wide = false;
@@ -34,7 +36,7 @@ nav img {
     position: absolute;
 }
 
-div {
+.page {
     margin:0 auto;
     padding-top:20px;
     max-width:700px;
@@ -55,7 +57,7 @@ h1 {
     <title>{title} - {$app.name}</title>
 </svelte:head>
 
-<div class:wide>
+<div class="page" class:wide>
     {#if header}
         <nav>
             <h1>
@@ -70,3 +72,13 @@ h1 {
     {/if}
     <slot/>
 </div>
+{#if $notificationList.length > 0}
+<div class="notify-list">
+    {#each $notificationList as notification (notification.id)}
+        <div class={`notify ${notification.severity}`}>
+            <Icon alt={notification.severity} icon={notification.severity}/>
+            <span role="alert">{notification.message}</span>
+        </div>
+    {/each}
+</div>
+{/if}
