@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { check_user, login, send_otp, logoff, logoff_all } from '../api.js';
+import { getDetails, login, send_otp, logoff, logoff_all } from '../api.js';
 
 class Login {
     constructor() {
@@ -42,7 +42,7 @@ class Login {
     }
 
     async upd() {
-        const {capabilities, user} = await check_user();
+        const {capabilities, user} = await getDetails();
         this.capabilities = new Set(capabilities);
         this.user = user;
         this.updated(this);

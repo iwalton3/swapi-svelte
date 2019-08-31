@@ -75,5 +75,5 @@ export function list_roles() { return jsonRequest('list_roles'); }
 export function get_all_users() { return jsonRequest('get_all_users'); }
 
 // Get the status of the current user.
-// Returns: { authenticated: [bool], capabilities: list[string], user: [string] }
-export function check_user() { return jsonRequest('check_user'); }
+// Returns: { capabilities: list[string], user: [string, nullable] }
+export function getDetails() { return jsonRequest('check_user'); }
