@@ -16,7 +16,7 @@
     }
 
     async function loginAct() {
-        const {success} = await $login.login(otp);
+        const success = await $login.login(otp);
         if (!success)
             notify("Login failed. Please try again.", "error");
         else
