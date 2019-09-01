@@ -31,9 +31,9 @@ For nginx, use try\_files:
 try_files $uri $uri/ /index.html;
 ```
 
-## SCSS Support
+## SCSS and TypeScript Support
 
-You can use scss files by including them from main.js globally or by using `lang="sass"` in a svelte component. Please note that scss in svelte components doesn't play nice with the Visual Studio Code svelte extension.
+You can use scss files by including them from main.js globally or by using `lang="scss"` in a svelte component. There is also partial TypeScript support in the build configuration, but please note this is not fully supported and may create long build times. Visual Studio Code integration with scss is supported.  Additional processors may be installed, please see: https://github.com/kaisermann/svelte-preprocess
 
 ## IE 11 Support
 
