@@ -5,7 +5,7 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import polyfill from 'rollup-plugin-polyfill';
 import postcss from 'rollup-plugin-postcss';
-import { sass } from 'svelte-preprocess-sass';
+import sveltePreprocess from 'svelte-preprocess';
 
 export default [
 	{
@@ -18,10 +18,7 @@ export default [
 		},
 		plugins: [
 			svelte({
-				preprocess: {
-					style: sass(),
-				},
-				// enable run-time checks when not in production
+				preprocess: sveltePreprocess(),
 				dev: false,
 				emitCss: true
 			}),
@@ -63,10 +60,7 @@ export default [
 		},
 		plugins: [
 			svelte({
-				preprocess: {
-					style: sass(),
-				},
-				// enable run-time checks when not in production
+				preprocess: sveltePreprocess(),
 				dev: false,
 				emitCss: true
 			}),

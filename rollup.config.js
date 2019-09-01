@@ -3,7 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import postcss from 'rollup-plugin-postcss';
-import { sass } from 'svelte-preprocess-sass';
+import sveltePreprocess from 'svelte-preprocess';
 
 export default {
 	input: 'src/main.js',
@@ -15,9 +15,7 @@ export default {
 	},
 	plugins: [
 		svelte({
-			preprocess: {
-				style: sass(),
-			},
+			preprocess: sveltePreprocess(),
 			dev: true,
 			emitCss: true
 		}),
