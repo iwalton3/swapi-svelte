@@ -6,13 +6,10 @@
 
 body {
     min-height:100vh;
-    border-top:10px solid #ECEEF1;
-    border-bottom:10px solid #ECEEF1;
     color:#61666c;
     font-size:1rem;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     line-height:1.5rem;
-    padding:0px 20px 0px;
 }
 
 code {
@@ -116,67 +113,54 @@ input[type="checkbox"] {
     }
 }
 
-/* Dark Theme */
-body.dark {
-    border-color: #222;
-    background: #111;
-    color: #ccc;
+/* smui height */
+html {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
 
-    * {
-        border-color: #555 !important;
-    }
+body, app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
-    a, button.link {
-        color: #b1cbf7;
-    }
+.drawer-container {
+    flex-grow: 1;
+    height: 0;
+    display: flex;
+}
 
-    a:visited {
-        color: #cdb4e7;
-    }
+.app-content {
+    flex: auto;
+    position: relative;
+    width: 0;
+    flex-grow: 1;
+    overflow: auto;
+}
 
-    input, button, textarea, select {
-        --moz-appearance: none;
-        --webkit-appearance: none;
-        border: 1px solid;
-        background-color: #353535;
-            color: #ccc;
-    }
+.main-content {
+    padding: 10px;
+}
 
-    h1, h2, h3, h4, h5, h6 {
-        width: 100%;
-        border-radius: 5px;
-    }
+.form-small {
+    display: block;
+    max-width: 350px;
+}
 
-    h1, h2 {
-        background-color: #28313e;
-    }
+.row-small {
+    margin-top: 10px;
+    max-width: 350px;
+    position: absolute;
+    width: 100%;
+}
 
-    h3, h4 {
-        background-color: #2a3731;
-    }
+.align-right {
+    position: relative;
+    float: right;
+}
 
-    h5, h6 {
-        background-color: #372a2a;
-    }
-
-    nav a.title {
-        color: #ccc;
-    }
-
-    .notify {
-        &.warn {
-            background-color:#a39306 !important;
-            border: 1px #f8f2be solid !important;
-        }
-        
-        &.info {
-            background-color:#075BA3 !important;
-            border: 1px #BDE5F8 solid !important;
-        }
-        
-        &.error {
-            background-color:#a30609 !important;
-            border: 1px #f8bec0 solid !important;
-        }
-    }
+.input-fw {
+    width: 100%;
 }

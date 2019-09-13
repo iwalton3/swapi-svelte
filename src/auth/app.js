@@ -11,7 +11,7 @@ const app = {
         admin: {
             name: "Auth Admin",
             require: 'accountmanager',
-            icon: 'user',
+            icon: 'recent_actors',
             routes: {
                 default: UserManager
             }

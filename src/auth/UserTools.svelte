@@ -5,6 +5,8 @@
     import Link from '../router/Link.svelte';
     import Icon from '../components/Icon.svelte';
     import { darkTheme } from '../util.js';
+    import Checkbox from '@smui/checkbox';
+    import FormField from '@smui/form-field';
 
     function logoff() {
         $login.logoff();
@@ -31,5 +33,8 @@
             <Link view={Login}>Log in</Link>
         </p>
     {/if}
-    <p><label><input type="checkbox" bind:checked={$darkTheme}> Use Dark Theme?</label></p>
+    <FormField>
+        <Checkbox bind:checked={$darkTheme} />
+        <span slot="label">Use Dark Theme?</span>
+    </FormField>
 </div>
