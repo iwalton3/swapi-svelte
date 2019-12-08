@@ -164,3 +164,9 @@ body, app {
 .input-fw {
     width: 100%;
 }
+
+// Make tables wrap instead of overflowing the page.
+.mdc-data-table__table {
+    white-space: initial !important;
+}
+
