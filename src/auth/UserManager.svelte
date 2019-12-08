@@ -4,12 +4,16 @@
     import SelectBox from '../components/SelectBox.svelte';
     import LazySelectBox from '../components/LazySelectBox.svelte';
     import notify from '../router/notify.js';
+    
+    import DataTable, {Head, Body, Row, Cell} from '@smui/data-table';
+    import Textfield from '@smui/textfield';
+    import Button, {Label} from '@smui/button';
 
     let users = [];
     let roles = [];
     
     let userToAdd = "";
-    let userToAddRole = "";
+    let userToAddRole = null;
 
     list_roles().then(result => {roles = result; });
 
@@ -48,29 +52,35 @@
     </div>
     <div class="section">
         <h3>User Listing</h3>
-        <table border="1">
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Role</th>
-            </tr>
-        </thead>
-        <tbody>
+        <DataTable table$aria-label="Users">
+        <Head>
+            <Row>
+                <Cell>User</Cell>
+                <Cell>Role</Cell>
+            </Row>
+        </Head>
+        <Body>
             {#each users as user (user.id)}
-                <tr>
-                    <td>{user.username}</td>
-                    <td><LazySelectBox bind:value={user.role} on:change={() => updUser(user)} options={roles}/></td>
-                </tr>
+                <Row>
+                    <Cell>{user.username}</Cell>
+                    <Cell><LazySelectBox bind:value={user.role} on:change={() => updUser(user)} options={roles}/></Cell>
+                </Row>
             {/each}
-        </tbody>
-        </table>
+        </Body>
+        </DataTable>
     </div>
-    <div class="section">
+    <div class="section pad-after">
         <h3>Add User</h3>
-            <form on:submit|preventDefault={addUser}>
-            <label>User: <input type="text" bind:value={userToAdd}></label>
-            <label>Role: <SelectBox bind:value={userToAddRole} options={roles}/></label>
-            <input type="submit" value="Add"/>
+        <form on:submit|preventDefault={addUser}>
+            <div class="row-small">
+                <Textfield class="input-fw" type="email" bind:value={userToAdd} label="User" />
+                <SelectBox name="Role" bind:value={userToAddRole} options={roles}/>
+            </div>
+            <div class="row-small clearfix">
+                <div class="align-right">
+                    <Button variant="unelevated" disabled={!userToAddRole}><Label>Add</Label></Button>
+                </div>
+            </div>
         </form>
     </div>
 </Page>

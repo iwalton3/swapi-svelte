@@ -43,20 +43,6 @@ div.section {
     margin-bottom: 1.5rem;
 }
 
-table, td {
-    border: solid 1px black;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width:100%;
-}
-
-td {
-    padding: 8px;
-}
-
 input[type="radio"] {
     --moz-appearance: radio;
     --webkit-appearance: radio;
@@ -152,7 +138,14 @@ body, app {
 .row-small {
     margin-top: 10px;
     max-width: 350px;
-    position: absolute;
+    position: relative;
+    width: 100%;
+}
+
+.row-large {
+    margin-top: 10px;
+    max-width: 1024px;
+    position: relative;
     width: 100%;
 }
 
@@ -163,6 +156,56 @@ body, app {
 
 .input-fw {
     width: 100%;
+}
+
+.image-center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: fill;
+}
+
+.inline {
+    display: inline;
+}
+
+.button-section {
+    min-height: 40px;
+}
+
+.button-section-lg {
+    min-height: 50px;
+}
+
+.indent {
+    @media only screen and (min-width: 1024px) {
+        margin-left: 40px;
+    }
+}
+
+.clearfix {
+    clear: both;
+}
+
+.pad-after {
+    padding-bottom: 20px;
+}
+
+.pad-after-label {
+    padding-right: 5px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.block {
+    display: block;
 }
 
 // Make tables wrap instead of overflowing the page.
