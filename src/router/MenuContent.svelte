@@ -7,7 +7,6 @@
     import H6 from '@smui/common/H6.svelte';
 
     function logoff() {
-        close();
         $login.logoff();
     }
 </script>
