@@ -22,6 +22,6 @@
     }
 </script>
 
-<a href={fullPath} on:click|preventDefault={click} class={className} title>
+<a href={fullPath} on:click|preventDefault={click} class={className} {title}>
     <slot/>
 </a>
