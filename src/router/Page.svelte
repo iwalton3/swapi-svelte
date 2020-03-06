@@ -5,8 +5,8 @@
     import MenuContent from './MenuContent.svelte';
     import { notificationList } from './notify.js';
     import Icon from '../components/Icon.svelte';
-    import TopAppBar, {Row, Section, Title} from '@svelte-material-ui/top-app-bar';
-    import IconButton from '@svelte-material-ui/icon-button';
+    import TopAppBar, {Row, Section, Title} from '@smui/top-app-bar';
+    import IconButton from '@smui/icon-button';
     import Drawer, {AppContent, Content, Header, Title as DrawerTitle, Subtitle, Scrim} from '@smui/drawer';
 
     export let title = "Main Page";
