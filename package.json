@@ -41,7 +41,7 @@
     "ws": "^7.2.1"
   },
   "dependencies": {
-    "@material/tab": "^5.1.0",
+    "@material/tab": "^3.1.0",
     "@material/top-app-bar": "^3.1.0",
     "core-js": "^3.6.4",
     "d3-dsv": "^1.2.0",
